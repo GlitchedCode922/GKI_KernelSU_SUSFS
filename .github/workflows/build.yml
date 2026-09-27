@@ -258,6 +258,12 @@ jobs:
         sublevel: ${{ steps.extract.outputs.sublevel }}
         root_flavor: ${{ inputs.root_flavor }}
 
+    - name: Add fbdev emulation
+      uses: ./.github/actions/set-kernel-config
+      with:
+        config_list: |
+          CONFIG_DRM_FBDEV_EMULATION=y
+
     - name: Fix selinux_hide pointer-bool-conversion on 6.6+ (ALL branches)
       shell: bash
       run: |
